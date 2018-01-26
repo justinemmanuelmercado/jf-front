@@ -1,0 +1,44 @@
+<div class="col-xs-12 col-md-6">
+    <uib-tabset active="active">
+        <uib-tab index="0">
+            <uib-tab-heading>
+                Job Finder
+            </uib-tab-heading>
+            <div class="well">
+                <h1>Looking to get hired?</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" placeholder="Email" ng-model="$ctrl.applicantEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" placeholder="Password" ng-model="$ctrl.applicantPassword">
+                    </div>
+                    <button type="submit" class="btn btn-default" ng-click="$ctrl.registerApplicant()">Create Account</button>
+                </form>
+            </div>
+
+        </uib-tab>
+        <uib-tab index="1">
+            <uib-tab-heading>
+                Business
+            </uib-tab-heading>
+
+            <div class="well">
+                <h1>Looking for skilled individuals?</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" class="form-control" placeholder="Email" ng-model="$ctrl.businessEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" placeholder="Password" ng-model="$ctrl.businessPassword">
+                    </div>
+                    <button type="submit" class="btn btn-default">Create Account</button>
+                </form>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+</div>
