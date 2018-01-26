@@ -23,4 +23,3 @@ export const RegistrationService = ($http, $log) => {
 };
 
 RegistrationService.$inject = ['$http', '$log'];
-
