@@ -1,6 +1,6 @@
 export const registration = {
   template: require('./registration.html'),
-  controller(RegistrationService, $log) {
+  controller(RegistrationService, $log, $uibModal) {
     const vm = this;
     vm.applicantEmail = '';
     vm.applicantPassword = '';
@@ -13,32 +13,43 @@ export const registration = {
       });
     };
 
-    vm.registerApplicant = () => {
+    vm.registerUser = (email, password, type) => {
       const data = {
-        email: vm.applicantEmail,
-        password: vm.applicantPassword,
-        type: 1
+        email,
+        password,
+        type
       };
 
-      $log.log(data);
-
-      RegistrationService.registerApplicant(data).then(response => {
-        $log.log(response);
+      RegistrationService.registerApplicant(data).then(() => {
+        vm.successModal = privateServices.registrationSuccessModal($uibModal);
+      }, err => {
+        $log.error(err);
       });
+
+      vm.isLoggedIn = false;
     };
-
-    vm.registerBusiness = () => {
-      const data = {
-        email: vm.businessEmail,
-        password: vm.businessPassword,
-        type: 2
-      };
-
-      RegistrationService.registerBusiness(data);
-    };
-
-    vm.isLoggedIn = false;
   }
 };
+registration.$inject = ['registration.service', '$log', '$uibModal', '$state'];
 
-registration.$inject = ['registration.service', '$log'];
+const privateServices = {
+  registrationSuccessModal: $uibModal => {
+    $uibModal.open({
+      animation: true,
+      template: `<div class="modal-header">
+                    <div class="modal-body" id="modal-body">
+                        <h3>Success!</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="button" ng-click="close()">OK</button>
+                    </div>`,
+      controller: ['$uibModalInstance', '$scope', ($uibModalInstance, $scope) => {
+        $scope.close = () => {
+          $uibModalInstance.close();
+        };
+      }],
+      controllerAs: '$ctrl',
+      size: 'sm'
+    });
+  }
+};
