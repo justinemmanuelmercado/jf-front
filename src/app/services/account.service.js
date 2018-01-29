@@ -1,6 +1,12 @@
-export const RegistrationService = ($http, $log) => {
+export const AccountService = ($http, $log) => {
   const apiUrl = 'http://localhost:8000';
   return {
+    loginUser: (email, password) => {
+      return $http.post(`${apiUrl}/api/auth/login`, {email, password}).then(data => {
+        $log.log(data);
+        return data;
+      });
+    },
     registerUser: data => {
       return $http.post(`${apiUrl}/api/users`, data).then(data => {
         $log.log(data);
@@ -16,4 +22,4 @@ export const RegistrationService = ($http, $log) => {
   };
 };
 
-RegistrationService.$inject = ['$http', '$log'];
+AccountService.$inject = ['$http', '$log'];

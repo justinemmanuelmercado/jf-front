@@ -1,0 +1,16 @@
+<div class="col-xs-12">
+    <div class="col-xs-12 col-md-6 jumbotron">
+        <h1>Log into JobFinder</h1>
+        <form>
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" placeholder="Email" ng-model="$ctrl.email">
+            </div>
+            <div class="form-group"></div>
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" ng-model="$ctrl.password">
+                <button type="button" class="btn btn-default" ng-click="$ctrl.loginUser($ctrl.email, $ctrl.password)">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>

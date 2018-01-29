@@ -5,9 +5,10 @@ import {home} from './app/home/home';
 import {header} from './app/header/header';
 import {registration} from './app/registration/registration';
 import {search} from './app/search/search';
+import {login} from './app/login/login';
 
 // Services/Factories
-import {RegistrationService} from './app/services/registration.service';
+import {AccountService} from './app/services/account.service';
 import {SearchService} from './app/services/search.service';
 
 // Vendor
@@ -28,5 +29,6 @@ angular
   .component('headerBar', header)
   .component('registration', registration)
   .component('search', search)
-  .factory('registration.service', RegistrationService)
+  .component('login', login)
+  .factory('account.service', AccountService)
   .factory('search.service', SearchService);

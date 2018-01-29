@@ -1,6 +1,6 @@
 export const registration = {
   template: require('./registration.html'),
-  controller(RegistrationService, $log, $uibModal) {
+  controller(AccountService, $log, $uibModal) {
     const vm = this;
     vm.applicantEmail = '';
     vm.applicantPassword = '';
@@ -8,7 +8,7 @@ export const registration = {
     vm.businessPassowrd = '';
 
     vm.$onInit = () => {
-      RegistrationService.getUsers().then(data => {
+      AccountService.getUsers().then(data => {
         $log.log(data);
       });
     };
@@ -20,7 +20,7 @@ export const registration = {
         type
       };
 
-      RegistrationService.registerApplicant(data).then(() => {
+      AccountService.registerUser(data).then(() => {
         vm.successModal = privateServices.registrationSuccessModal($uibModal);
       }, err => {
         $log.error(err);
@@ -30,7 +30,7 @@ export const registration = {
     };
   }
 };
-registration.$inject = ['registration.service', '$log', '$uibModal', '$state'];
+registration.$inject = ['account.service', '$log', '$uibModal', '$state'];
 
 const privateServices = {
   registrationSuccessModal: $uibModal => {
