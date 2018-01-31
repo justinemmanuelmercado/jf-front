@@ -7,8 +7,10 @@ export const login = {
     vm.password = '';
 
     vm.loginUser = (email, password) => {
-      AccountService.loginUser(email, password).success(data => {
+      AccountService.loginUser(email, password).then(data => {
         $log.log(data);
+      }, err => {
+        $log.error(err);
       });
     };
 

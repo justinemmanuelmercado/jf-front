@@ -21,5 +21,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('search', {
       url: '/search/:search',
       component: 'search'
+    })
+    .state('profile', {
+      url: '/profile',
+      component: 'profile'
     });
 }

@@ -1,9 +1,15 @@
-export const AccountService = ($http, $log) => {
+export const AccountService = ($http, $log, $cookies, $state) => {
   const apiUrl = 'http://localhost:8000';
   return {
+    getData: authToken => {
+      return $http.post(`${apiUrl}/api/auth/me?token=${authToken}`).then(data => {
+        return data;
+      }).catch(err => $log.log(err));
+    },
     loginUser: (email, password) => {
       return $http.post(`${apiUrl}/api/auth/login`, {email, password}).then(data => {
-        $log.log(data);
+        $cookies.put('token', data.data.access_token);
+        $state.go('profile');
         return data;
       });
     },
@@ -22,4 +28,4 @@ export const AccountService = ($http, $log) => {
   };
 };
 
-AccountService.$inject = ['$http', '$log'];
+AccountService.$inject = ['$http', '$log', '$cookies', '$state'];
