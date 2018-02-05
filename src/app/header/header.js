@@ -1,14 +1,22 @@
 export const header = {
   template: require('./header.html'),
-  controller($cookies) {
+  controller($cookies, AccountService, $rootScope) {
     const vm = this;
     vm.isLoggedIn = false;
+    vm.isLoggedIn = Boolean($cookies.get('token'));
+
+    vm.watchRoot = $rootScope.$on('$stateChangeSuccess', () => {
+      vm.isLoggedIn = Boolean($cookies.get('token'));
+    });
+
+    vm.logOut = () => {
+      AccountService.logOut();
+    };
+
     vm.$onInit = () => {
-      if ($cookies.get('token')) {
-        vm.isLoggedIn = true;
-      }
+      vm.isLoggedIn = Boolean($cookies.get('token'));
     };
   }
 };
 
-header.$inject = ['$cookies'];
+header.$inject = ['$cookies', 'account.service', '$rootScope'];

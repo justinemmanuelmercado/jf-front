@@ -16,6 +16,7 @@ export const AccountService = ($http, $log, $cookies, $state) => {
     registerUser: data => {
       return $http.post(`${apiUrl}/api/users`, data).then(data => {
         $log.log(data);
+        $state.go('login');
         return data.data;
       });
     },
@@ -24,6 +25,10 @@ export const AccountService = ($http, $log, $cookies, $state) => {
         $log.log(data);
         return data.data;
       }).catch(err => $log.log(err));
+    },
+    logOut: () => {
+      $cookies.remove('token');
+      $state.go('login');
     }
   };
 };

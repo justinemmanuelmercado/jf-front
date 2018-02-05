@@ -1,0 +1,23 @@
+<div>
+    <div class="col-xs-12">
+        <div class="col-xs-12 well" ng-repeat="match in $ctrl.matches">
+            <div>
+                <h3>Your skills in </h3>
+                <p>
+                    <span ng-repeat="skill in match.matchingSkills">
+                        {{ skill.aSkill }}({{ skill.aYears }})
+                    </span>
+                </p>
+                <h3>qualify can help you apply as a/an</h3>
+                <h2>
+                    {{ match.job.job_title }}
+                </h2>
+                <h2>At</h2>
+                <h1>
+                    {{ match.business.userInfo.data.business_name }}
+                </h1>
+                <button type="button" class="btn btn-default" ng-click="$ctrl.sendMessage(match.business.userInfo.data.user_id)">Send them a message</button>
+            </div>
+        </div>
+    </div>
+</div>

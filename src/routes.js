@@ -25,5 +25,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('profile', {
       url: '/profile',
       component: 'profile'
+    })
+    .state('matching', {
+      url: '/matching',
+      component: 'matching'
     });
 }

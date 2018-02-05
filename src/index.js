@@ -7,6 +7,7 @@ import {registration} from './app/registration/registration';
 import {search} from './app/search/search';
 import {login} from './app/login/login';
 import {profile} from './app/profile/profile';
+import {matching} from './app/matching/matching';
 
 // Services/Factories
 import {AccountService} from './app/services/account.service';
@@ -33,5 +34,6 @@ angular
   .component('search', search)
   .component('login', login)
   .component('profile', profile)
+  .component('matching', matching)
   .factory('account.service', AccountService)
   .factory('search.service', SearchService);
