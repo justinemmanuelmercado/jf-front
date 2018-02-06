@@ -1,6 +1,6 @@
 export const matching = {
   template: require('./matching.html'),
-  controller(AccountService, $cookies, $state, $log, $scope) {
+  controller(AccountService, $cookies, $state, $log, $scope, $rootScope) {
     const vm = this;
     vm.userDetails = {};
     vm.matches = [];
@@ -14,6 +14,12 @@ export const matching = {
         vm.ws.close();
       });
 
+      const onStateChange = $rootScope.$on('$stateChangeStart', () => {
+        vm.ws.close();
+      });
+
+      $log.log(onStateChange);
+
       AccountService.getData($cookies.get('token')).then(data => {
         vm.userDetails = data.data;
         $log.log('User data', vm.userDetails);
@@ -25,24 +31,19 @@ export const matching = {
         vm.ws.onmessage = msg => {
           const convertedMessageData = angular.fromJson(msg.data);
 
-          if (convertedMessageData.message === 'newMatches') {
+          if (convertedMessageData.message === 'newMatchesApplicant') {
             vm.matches = convertedMessageData.matches;
             $log.log('new match', vm.matches);
             $scope.$digest();
           }
 
-          if (convertedMessageData.message === 'update') {
-            vm.matches.concat(convertedMessageData.matches);
+          if (convertedMessageData.message === 'newMatchesBusiness') {
+            vm.matches = convertedMessageData.matches;
+            $log.log('new match', vm.matches);
             $scope.$digest();
           }
+
           $log.log(convertedMessageData);
-        };
-        vm.ws.close = () => {
-          vm.ws.send({
-            message: 'close',
-            id: vm.userDetails.id
-          });
-          $log.log('Closing websocket');
         };
       });
     };
@@ -53,4 +54,12 @@ export const matching = {
   }
 };
 
-matching.$inject = ['account.service', '$cookies', '$state', '$log', '$scope'];
+matching.$inject = [
+  'account.service',
+  '$cookies',
+  '$state',
+  '$log',
+  '$scope',
+  '$rootScope'
+];
+
