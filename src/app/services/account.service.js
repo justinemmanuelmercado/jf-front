@@ -1,4 +1,4 @@
-export const AccountService = ($http, $log, $cookies, $state) => {
+export const AccountService = ($http, $log, $cookies, $state, $window) => {
   const apiUrl = 'http://localhost:8000';
   return {
     getData: authToken => {
@@ -8,8 +8,14 @@ export const AccountService = ($http, $log, $cookies, $state) => {
     },
     loginUser: (email, password) => {
       return $http.post(`${apiUrl}/api/auth/login`, {email, password}).then(data => {
-        $cookies.put('token', data.data.access_token);
+        const today = new Date();
+        const expiresValue = new Date(today);
+        expiresValue.setSeconds(today.getSeconds() + 3600);
+        $cookies.put('token', data.data.access_token, {
+          expires: expiresValue
+        });
         $state.go('profile');
+        $window.location.reload();
         return data;
       });
     },
@@ -29,8 +35,9 @@ export const AccountService = ($http, $log, $cookies, $state) => {
     logOut: () => {
       $cookies.remove('token');
       $state.go('login');
+      $window.location.reload();
     }
   };
 };
 
-AccountService.$inject = ['$http', '$log', '$cookies', '$state'];
+AccountService.$inject = ['$http', '$log', '$cookies', '$state', '$window'];
