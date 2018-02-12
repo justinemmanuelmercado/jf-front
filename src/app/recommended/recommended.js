@@ -4,6 +4,9 @@ export const recommended = {
     const vm = this;
     vm.userDetails = {};
     vm.recommendedResults = [];
+    vm.maxResults = 10;
+    vm.currentPage = 1;
+    vm.searchFilter = '';
 
     vm.$onInit = () => {
       if (!$cookies.get('token')) {

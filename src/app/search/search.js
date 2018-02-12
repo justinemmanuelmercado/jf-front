@@ -1,12 +1,16 @@
 export const search = {
   template: require('./search.html'),
-  controller(SearchService, $log) {
+  controller(SearchService, $log, $stateParams) {
     const vm = this;
 
     vm.searchResults = [];
     vm.searchFilter = '';
 
     vm.$onInit = () => {
+      if ($stateParams.search) {
+        vm.searchFilter = $stateParams.search;
+      }
+
       SearchService.getJobs('search').then(results => {
         vm.searchResults = results;
         $log.log(vm.searchResults);
@@ -17,4 +21,4 @@ export const search = {
   }
 };
 
-search.$inject = ['search.service', '$log'];
+search.$inject = ['search.service', '$log', '$stateParams'];

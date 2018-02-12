@@ -16,6 +16,7 @@
             <input type="text" class="form-control" placeholder="Search" ng-model="$ctrl.searchTerm">
           </div>
           <button type="submit" class="btn btn-default" ui-sref="search({search: $ctrl.searchTerm})">Submit</button>
+          <button ng-show="$ctrl.userDetails.type === 1" type="submit" class="btn btn-default" ui-sref="recommended">Recommended Jobs</button>
         </form>
         <ul class="nav navbar-nav navbar-right" ng-hide="$ctrl.isLoggedIn">
           <li>
