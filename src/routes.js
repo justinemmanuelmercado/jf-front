@@ -29,5 +29,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('matching', {
       url: '/matching',
       component: 'matching'
+    })
+    .state('recommended', {
+      url: '/recommended',
+      component: 'recommended'
     });
 }

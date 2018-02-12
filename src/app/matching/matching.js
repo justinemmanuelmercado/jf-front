@@ -43,7 +43,6 @@ export const matching = {
         };
         vm.ws.onmessage = msg => {
           const convertedMessageData = angular.fromJson(msg.data);
-
           if (convertedMessageData.message === 'newMatchesApplicant') {
             convertedMessageData.matches.forEach(business => {
               business.jobs.forEach(job => {
@@ -77,8 +76,21 @@ export const matching = {
             });
           }
 
-          if (convertedMessageData.message === 'newMatchesBusiness' || convertedMessageData.message === 'additionalMatchesBusiness') {
-            vm.matches.push(convertedMessageData.matches);
+          if (convertedMessageData.message === 'newMatchesBusiness') {
+            vm.matches = convertedMessageData.matches;
+            $log.log('new match', vm.matches);
+            $scope.$digest();
+          }
+          $log.log('this is the fucking message', convertedMessageData);
+          if (convertedMessageData.message === 'additionalMatchesBusiness') {
+            const applicant = {
+              userInfo: convertedMessageData.user
+            };
+            const jobMatch = convertedMessageData.jobMatch;
+            vm.matches.push({
+              applicant,
+              jobMatch
+            });
             $log.log('new match', vm.matches);
             $scope.$digest();
           }

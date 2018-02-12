@@ -10,7 +10,7 @@
     <span ng-show="$ctrl.matches.length > 0">
       You may be interested in these candidates:
       <ul class="list-group">
-        <li class="list-group-item" ng-repeat="applicant in $ctrl.matches[0]">
+        <li class="list-group-item" ng-repeat="applicant in $ctrl.matches">
           <h3>
             {{ applicant.applicant.userInfo.data.first_name }} {{ applicant.applicant.userInfo.data.last_name }}
           </h3>
