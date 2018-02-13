@@ -30,11 +30,11 @@
               </div>
               <div class="col-xs-3">
 
-                <button class="btn btn-warning">View Job</button>
+                <button class="btn btn-warning" ui-sref="job({jobId: job.id})">View Job</button>
               </div>
             </li>
           </ul>
-          <button class="btn btn-warning">View Applicant</button>
+          <button class="btn btn-warning" ui-sref="user({userId: applicant.applicant.userInfo.id})">View Applicant</button>
         </li>
       </ul>
     </span>
@@ -60,9 +60,9 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-warning" type="button" ng-click="$ctrl.ok('message')">Message Business</button>
+      <button class="btn btn-warning" type="button" ng-click="$ctrl.ok($ctrl.match.job.business_id, 'business')">View Business</button>
       <button class="btn btn-warning" type="button" ng-click="$ctrl.ok('next')">Next Match</button>
-      <button class="btn btn-warning" type="button" ng-click="$ctrl.ok('view')">View Job Listing</button>
+      <button class="btn btn-warning" type="button" ng-click="$ctrl.ok($ctrl.match.job.id, 'job')">View Job</button>
     </div>
   </script>
   <script type="text/ng-template" id="noMatchModal.html">

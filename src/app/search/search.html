@@ -19,8 +19,8 @@
                         <h4>{{ job.address }}, {{ job.state }}, {{ job.city }}</h4>
                         <p>{{ job.description | limitTo:400 }}{{ job.description.length > 400 ? '...' : '' }} </p>
                         <p>
-                            <a href="#" class="btn btn-primary" role="button">Learn More</a>
-                            <a href="#" class="btn btn-default" role="button">Send Resume</a>
+                            <a href="#" class="btn btn-warning" role="button" ui-sref="job({jobId: job.id})">View Job</a>
+                            <a href="#" class="btn btn-warning" role="button" ui-sref="user({userId: job.business_id})">View Job Owner</a>
                         </p>
                     </div>
                 </div>

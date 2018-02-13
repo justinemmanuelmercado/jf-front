@@ -11,7 +11,6 @@
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
                 <span class="col-xs-4">
-
                     {{ skill.skill }}
                 </span>
                 <span class="col-xs-5 col-xs-offset-3 text-right">
@@ -21,10 +20,10 @@
             </li>
 
             <li class="list-group-item" ng-show="!$ctrl.userDetails.requirements">
-                No skills listed yet. Update your profile to add skills
+                No skills listed.
             </li>
         </ul>
-        <button class="btn btn-default">Update Profile</button>
+        <button class="btn btn-default">Message User</button>
     </div>
     <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 2">
             <div class="btn-lg"></div>
@@ -47,14 +46,13 @@
                     <span class="col-xs-12">
                             {{ job.description | limitTo:100 }}{{ job.description.length > 50 ? '...' : '' }}
                     </span>
-                    <button class="btn btn-danger">Delete Job</button>    
+                    <button class="btn btn-warn">View Job</button>    
                 </li>
     
                 <li class="list-group-item" ng-show="!$ctrl.userDetails.requirements">
-                    No skills listed yet. Update your profile to add skills
+                    No skills listed.
                 </li>
             </ul>
-            <button class="btn btn-default">Update Profile</button>
-            <button class="btn btn-default">Add Jobs</button>
+            <button class="btn btn-warn">Message User</button>
         </div>
 </div>

@@ -23,8 +23,8 @@
                     }},
                 </span>
             </p>
-            <button class="btn btn-warning">View Job</button>
-            <button class="btn btn-warning">Message Business</button>
+            <button class="btn btn-warning" ui-sref="job({jobId: job.id})">View Job</button>
+            <button class="btn btn-warning" ui-sref="user({userId: job.business_id})">View Business</button>
         </div>
         <ul uib-pagination total-items="$ctrl.recommendedResults.length" ng-model="$ctrl.currentPage"></ul>
     </div>

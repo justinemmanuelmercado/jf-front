@@ -33,5 +33,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('recommended', {
       url: '/recommended',
       component: 'recommended'
+    })
+    .state('user', {
+      url: '/profile/:userId',
+      component: 'user'
+    })
+    .state('job', {
+      url: '/job/:jobId',
+      component: 'jobs'
     });
 }

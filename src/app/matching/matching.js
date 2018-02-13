@@ -81,7 +81,7 @@ export const matching = {
             $log.log('new match', vm.matches);
             $scope.$digest();
           }
-          $log.log('this is the fucking message', convertedMessageData);
+
           if (convertedMessageData.message === 'additionalMatchesBusiness') {
             const applicant = {
               userInfo: convertedMessageData.user
@@ -145,7 +145,10 @@ export const matching = {
         }
       });
 
-      vm.matchModalInstance.result.then(msg => {
+      vm.matchModalInstance.result.then(obj => {
+        const id = obj.id;
+        const msg = obj.msg;
+        $log.log('going to', msg, id);
         if (msg === 'next') {
           vm.loadingMatches = true;
           $timeout(() => {
@@ -153,12 +156,12 @@ export const matching = {
           }, 1000);
         }
 
-        if (msg === 'message') {
-          $state.go('message');
+        if (msg === 'business') {
+          $state.go('user', {userId: id});
         }
 
-        if (msg === 'view') {
-          $state.go('view-job');
+        if (msg === 'job') {
+          $state.go('job', {jobId: id});
         }
       }, () => {
         $log.info('Modal dismissed at: ' + new Date());
@@ -190,21 +193,20 @@ matching.$inject = [
   '$uibModal'
 ];
 
-const matchModalController = ['$uibModalInstance', 'match', '$log', function ($uibModalInstance, match, $log) {
+const matchModalController = ['$uibModalInstance', 'match', function ($uibModalInstance, match) {
   const vm = this;
   vm.match = match;
 
-  $log.log('Open match');
-
-  vm.ok = msg => {
-    $uibModalInstance.close(msg);
+  vm.ok = (id, msg) => {
+    $uibModalInstance.close({
+      id,
+      msg
+    });
   };
 }];
 
-const noMatchModalController = ['$uibModalInstance', '$log', function ($uibModalInstance, $log) {
+const noMatchModalController = ['$uibModalInstance', function ($uibModalInstance) {
   const vm = this;
-
-  $log.log('Open match');
 
   vm.ok = () => {
     $uibModalInstance.close();

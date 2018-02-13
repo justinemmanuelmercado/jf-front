@@ -36,6 +36,18 @@ export const AccountService = ($http, $log, $cookies, $state, $window) => {
       $cookies.remove('token');
       $state.go('login');
       $window.location.reload();
+    },
+    getUserData: id => {
+      return $http.get(`${apiUrl}/api/users/${id}`).then(data => {
+        $log.log(data);
+        return data;
+      }).catch(err => $log.log(err));
+    },
+    getJobData: id => {
+      return $http.get(`${apiUrl}/api/jobs/${id}`).then(data => {
+        $log.log(data);
+        return data;
+      }).catch(err => $log.log(err));
     }
   };
 };
