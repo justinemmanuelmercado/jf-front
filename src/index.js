@@ -11,6 +11,7 @@ import {matching} from './app/matching/matching';
 import {recommended} from './app/recommended/recommended';
 import {user} from './app/user/user';
 import {jobs} from './app/jobs/jobs';
+import {messaging} from './app/messaging/messaging';
 
 // Services/Factories
 import {AccountService} from './app/services/account.service';
@@ -41,5 +42,6 @@ angular
   .component('recommended', recommended)
   .component('user', user)
   .component('jobs', jobs)
+  .component('messaging', messaging)
   .factory('account.service', AccountService)
   .factory('search.service', SearchService);

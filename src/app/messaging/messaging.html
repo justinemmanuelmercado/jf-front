@@ -1,0 +1,33 @@
+<div class="col-xs-12">
+    <h1>{{ $ctrl.recipientName }}</h1>
+    <ul class="list-group">
+        <li class="list-group-item" ng-show="$ctrl.messages.length < 1">
+        <p class="text-center">
+            No messages available...
+        </p>
+        </li>
+        <li ng-repeat="message in $ctrl.messages" ng-class="{
+            'list-group-item' : true,
+            'text-left' : message.recipient == $ctrl.userDetails.id,
+            'text-right' : message.recipient == $ctrl.recipientId
+        }" ng-show="message.message.length > 0">
+        <i>{{ message.created_at }} - {{ message.recipient == $ctrl.recipientId ? 'You' : $ctrl.recipientName }}:</i>
+        <p class="a">
+            {{ message.message }}
+        </p>
+        </li>
+    </ul>
+</div>
+<div class="well">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-10 col-xs-12">
+                <textarea class="form-control col-xs-12" rows="5" ng-model="$ctrl.message" placeholder="Message..."></textarea>
+            </div>
+            <div class="col-md-2 col-xs-12">
+                <button class="btn btn-lg btn-primary col-xs-6 col-md-12" ng-click="$ctrl.sendMessage()">Send</button>
+                <button class="btn btn-lg btn-danger col-xs-6 col-md-12" ng-click="$ctrl.clearMessage()">Clear</button>
+            </div>
+        </div>
+    </div>
+</div>

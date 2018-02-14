@@ -41,5 +41,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('job', {
       url: '/job/:jobId',
       component: 'jobs'
+    })
+    .state('messaging', {
+      url: '/messaging/:recipientId',
+      component: 'messaging'
     });
 }

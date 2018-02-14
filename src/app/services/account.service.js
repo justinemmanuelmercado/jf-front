@@ -48,6 +48,18 @@ export const AccountService = ($http, $log, $cookies, $state, $window) => {
         $log.log(data);
         return data;
       }).catch(err => $log.log(err));
+    },
+    sendMessage: (authToken, recipient, message) => {
+      return $http.post(`${apiUrl}/api/auth/message?token=${authToken}`, {message, recipient}).then(data => {
+        $log.log(data);
+        return data.data;
+      });
+    },
+    getMessages: (authToken, recipient) => {
+      return $http.post(`${apiUrl}/api/auth/get_message?token=${authToken}`, {recipient}).then(data => {
+        $log.log('Messages data: ', data.data);
+        return data.data;
+      });
     }
   };
 };
