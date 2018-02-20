@@ -45,5 +45,9 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('messaging', {
       url: '/messaging/:recipientId',
       component: 'messaging'
+    })
+    .state('update', {
+      url: '/update',
+      component: 'update'
     });
 }

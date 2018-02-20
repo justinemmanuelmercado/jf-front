@@ -1,4 +1,4 @@
-export const AccountService = ($http, $log, $cookies, $state, $window) => {
+export const AccountService = ($http, $log, $cookies, $state, $window, $filter) => {
   const apiUrl = 'http://localhost:8000';
   return {
     getData: authToken => {
@@ -60,8 +60,30 @@ export const AccountService = ($http, $log, $cookies, $state, $window) => {
         $log.log('Messages data: ', data.data);
         return data.data;
       });
+    },
+    getSkills: () => {
+      return $http.get(`${apiUrl}/api/skills`).then(data => {
+        $log.log(data);
+        return data.data;
+      });
+    },
+    addSkillApplicant: (skill, id) => {
+      const skillName = skill.skill;
+      const skillYears = skill.years_exp;
+      return $http.post(`${apiUrl}/api/skills/applicant`, {skillName, skillYears, id}).then(data => {
+        $log.log(data);
+        return data.data;
+      });
+    },
+    updateApplicant: applicant => {
+      applicant.dateOfBirth = $filter('date')(applicant.dateOfBirth, 'yyyy-MM-dd');
+      return $http.post(`${apiUrl}/api/applicant`, applicant).then(data => {
+        $log.log(applicant, applicant);
+        $state.go('profile');
+        return data;
+      });
     }
   };
 };
 
-AccountService.$inject = ['$http', '$log', '$cookies', '$state', '$window'];
+AccountService.$inject = ['$http', '$log', '$cookies', '$state', '$window', '$filter'];
