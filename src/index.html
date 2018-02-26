@@ -1,18 +1,21 @@
 <!doctype html>
 <html>
-  <head>
-    <base href="/">
-    <meta charset="utf-8">
-    <title>FountainJS</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png" />
-  </head>
 
-  <body ng-app="app">
-    <header-bar></header-bar>
-    <div class="container">
-      <ui-view></ui-view>
-    </div>
-  </body>
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <title>FountainJS</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="http://fountainjs.io/assets/imgs/fountain.png" />
+</head>
+
+<body ng-app="app">
+  <header-bar></header-bar>
+  <div class="container">
+    <ui-view></ui-view>
+  </div>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDuJfEa0g92pOOjsB7o08avrqror9q0Zo&libraries=places" type="text/javascript"></script>
+</body>
+
 </html>

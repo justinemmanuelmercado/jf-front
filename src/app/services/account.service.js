@@ -82,6 +82,23 @@ export const AccountService = ($http, $log, $cookies, $state, $window, $filter) 
         $state.go('profile');
         return data;
       });
+    },
+    deleteSkillApplicant: id => {
+      return $http.post(`${apiUrl}/api/applicant/delete`, {id}).then(data => {
+        $log.log(data);
+        return data;
+      });
+    },
+    businessSaveJob: job => {
+      return $http.post(`${apiUrl}/api/business/job`, job).then(data => {
+        $log.log('Save Job return: ', data);
+        return data;
+      });
+    },
+    updateBusiness: business => {
+      return $http.post(`${apiUrl}/api/business/update`, business).then(data => {
+        return data;
+      });
     }
   };
 };

@@ -1,6 +1,6 @@
 export const profile = {
   template: require('./profile.html'),
-  controller(AccountService, $log, $cookies, $state) {
+  controller(AccountService, $log, $cookies, $state, $scope) {
     const vm = this;
 
     vm.email = '';
@@ -16,6 +16,21 @@ export const profile = {
       vm.authToken = $cookies.get('token');
       AccountService.getData(vm.authToken).then(data => {
         vm.userDetails = data.data;
+        $scope.map = {
+          center: {
+            latitude: vm.userDetails.data.latitude,
+            longitude: vm.userDetails.data.longitude
+          }, zoom: 15
+        };
+        $scope.marker = {
+          id: 0, coords: {
+            latitude: vm.userDetails.data.latitude, longitude: vm.userDetails.data.longitude
+          },
+          options: {
+            draggable: false
+          },
+          events: {}
+        };
         $log.log(vm.userDetails);
       });
     };
@@ -32,4 +47,4 @@ export const profile = {
   }
 };
 
-profile.$inject = ['account.service', '$log', '$cookies', '$state'];
+profile.$inject = ['account.service', '$log', '$cookies', '$state', '$scope'];

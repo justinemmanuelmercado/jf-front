@@ -1,4 +1,7 @@
+
+/*eslint-disable */
 import angular from 'angular';
+/*eslint-enable */
 
 // Components
 import {home} from './app/home/home';
@@ -23,6 +26,9 @@ import 'angular-ui-router';
 import 'angular-ui-bootstrap';
 import 'angular-animate';
 import 'angular-cookies';
+import 'lodash';
+import 'angular-simple-logger';
+import 'angular-google-maps';
 
 import routesConfig from './routes';
 
@@ -31,7 +37,7 @@ import './index.scss';
 export const app = 'app';
 
 angular
-  .module(app, ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngCookies'])
+  .module(app, ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngCookies', 'uiGmapgoogle-maps'])
   .config(routesConfig)
   .component('app', home)
   .component('headerBar', header)
@@ -46,4 +52,11 @@ angular
   .component('messaging', messaging)
   .component('update', update)
   .factory('account.service', AccountService)
-  .factory('search.service', SearchService);
+  .factory('search.service', SearchService)
+  .config(['uiGmapGoogleMapApiProvider', uiGmapGoogleMapApiProvider => {
+    uiGmapGoogleMapApiProvider.configure({
+      key: 'AIzaSyCDuJfEa0g92pOOjsB7o08avrqror9q0Zo',
+      v: '3.20',
+      libraries: 'places'
+    });
+  }]);

@@ -8,7 +8,6 @@
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
                 <span class="col-xs-4">
-
                     {{ skill.skill }}
                 </span>
                 <span class="col-xs-5 col-xs-offset-3 text-right">
@@ -25,19 +24,26 @@
     </div>
     <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 2">
         <div class="btn-lg"></div>
-        <img src="http://via.placeholder.com/200x200" alt="profile picture" class="img-thumbnail img-responsive">
         <h4>General Information</h4>
         <p>Business Name: {{ $ctrl.userDetails.data.business_name }} {{ $ctrl.userDetails.data.last_name }}</p>
         <p>Description: {{ $ctrl.userDetails.data.description }}</p>
+        <div>
+            <label>
+                Map Location
+            </label>
+            <p>
+            {{ marker.coords.latitude }}, {{ marker.coords.longitude }}
+            </p>
+            <ui-gmap-google-map ng-if="$ctrl.userDetails.type === 2" center="map.center" zoom="map.zoom" draggable="true" options="options">
+                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
         <h4>Job Postings</h4>
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="job in $ctrl.userDetails.requirements">
                 <h4 class="col-xs-12">
-                    {{ job.job_title }} in {{ job.state }}, {{ job.city }}
+                    {{ job.job_title }}
                 </h4>
-                <p class="col-xs-12">
-                    {{ job.address }}
-                </p>
                 <p class="col-xs-12">
                     ADD FIELD OF STUDY/JOB FIELD
                 </p>

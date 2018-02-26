@@ -1,0 +1,23 @@
+{
+  "name": "thesis-front",
+  "description": "",
+  "main": "",
+  "authors": [
+    "EJ Mercado <ej@ejmercado.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/justinemmanuelmercado/jf-front",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-address-picker": "angular-addresspicker#*",
+    "jquery-addresspicker": "jquery-addresspicker-bygiro#*",
+    "angular-googlemap-location-picker": "*",
+    "jquery-colorpicker-bygiro": "*"
+  }
+}
