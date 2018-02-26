@@ -26,9 +26,9 @@ import 'angular-ui-router';
 import 'angular-ui-bootstrap';
 import 'angular-animate';
 import 'angular-cookies';
-import 'lodash';
-import 'angular-simple-logger';
-import 'angular-google-maps';
+require('lodash');
+require('angular-simple-logger');
+require('angular-google-maps');
 
 import routesConfig from './routes';
 
