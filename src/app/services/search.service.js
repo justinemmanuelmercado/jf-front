@@ -1,5 +1,5 @@
 export const SearchService = ($http, $log) => {
-  const apiUrl = 'http://localhost:8000';
+  const apiUrl = 'http://45.77.134.231:8000';
   return {
     getJobs: () => {
       return $http.get(`${apiUrl}/api/jobs`).then(data => {
