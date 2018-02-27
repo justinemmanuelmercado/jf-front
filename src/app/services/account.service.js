@@ -1,6 +1,6 @@
 export const AccountService = ($http, $log, $cookies, $state, $window, $filter) => {
-  const apiUrl = 'http://45.77.134.231:81';
   // const apiUrl = 'http://localhost:8000';
+  const apiUrl = 'http://api.mantunkapanintunan.com';
   return {
     getData: authToken => {
       return $http.post(`${apiUrl}/api/auth/me?token=${authToken}`).then(data => {
