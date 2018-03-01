@@ -135,7 +135,7 @@
                     {{ skill.years_exp > 0 ? skill.years_exp + ' year/s of experience' : 'Less than 1 year experience' }}
                 </span>
                 <div class="col-xs-1">
-                    <button class="btn btn-danger" ng-click="$ctrl.deleteSkillApplicant(skill.id)">
+                    <button class="btn btn-danger" ng-click="$ctrl.deleteJobSkill($index)">
                         X
                     </button>
                 </div>

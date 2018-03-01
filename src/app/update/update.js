@@ -165,6 +165,10 @@ export const update = {
       };
     };
 
+    vm.deleteJobSkill = ind => {
+      vm.newJob.requirements.splice(ind, 1);
+    };
+
     vm.updateBusinessDetails = () => {
       AccountService.updateBusiness({
         id: vm.userDetails.id,
