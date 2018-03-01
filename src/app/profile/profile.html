@@ -16,7 +16,7 @@
                 </span>
             </li>
 
-            <li class="list-group-item" ng-hide="$ctrl.userDetails.requirements.length > 1">
+            <li class="list-group-item" ng-hide="$ctrl.userDetails.requirements.length > 0">
                 No skills listed yet. Update your profile to add skills
             </li>
         </ul>
@@ -44,9 +44,6 @@
                 <h4 class="col-xs-12">
                     {{ job.job_title }}
                 </h4>
-                <p class="col-xs-12">
-                    ADD FIELD OF STUDY/JOB FIELD
-                </p>
                 <span class="col-xs-12">
                     {{ job.description | limitTo:100 }}{{ job.description.length > 50 ? '...' : '' }}
                 </span>
@@ -58,6 +55,5 @@
             </li>
         </ul>
         <button class="btn btn-default" ui-sref="update">Update Profile</button>
-        <button class="btn btn-default">Add Jobs</button>
     </div>
 </div>

@@ -28,7 +28,7 @@
                 No skills listed.
             </li>
         </ul>
-        <button class="btn btn-default">Message User</button>
+        <button class="btn btn-warn" ui-sref="messaging({recipientId: $ctrl.userDetails.id})">Message User</button>
     </div>
     <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 2">
         <div class="btn-lg"></div>
@@ -74,6 +74,6 @@
                 No skills listed.
             </li>
         </ul>
-        <button class="btn btn-warn">Message User</button>
+        <button class="btn btn-warn" ui-sref="messaging({recipientId: $ctrl.userDetails.id})">Message User</button>
     </div>
 </div>

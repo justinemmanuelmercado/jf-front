@@ -3,6 +3,8 @@
         Sorry we couldn't find any jobs to recommend..
     </div>
     <div ng-show="$ctrl.recommendedResults.length > 0">
+        <ul uib-pagination total-items="$ctrl.recommendedResults.length" ng-model="$ctrl.currentPage"></ul>
+
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">
                 <span class="glyphicon glyphicon-search">

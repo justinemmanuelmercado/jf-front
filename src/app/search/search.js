@@ -5,6 +5,8 @@ export const search = {
 
     vm.searchResults = [];
     vm.searchFilter = '';
+    vm.maxResults = 10;
+    vm.currentPage = 1;
 
     vm.$onInit = () => {
       if ($stateParams.search) {
