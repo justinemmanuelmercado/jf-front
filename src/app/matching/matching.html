@@ -2,7 +2,7 @@
   <div class="col-xs-12" ng-show="$ctrl.loadingMatches && !($ctrl.userDetails.type === 2 && $ctrl.matches.length > 0)">
     Loading Matches...
   </div>
-  <button class="btn btn-default" type="button" ng-hide="$ctrl.loadingMatches" ng-click="$ctrl.onStartMatching()">Start Matching</button>
+  <button class="btn btn-info btn-lg" type="button" ng-hide="$ctrl.loadingMatches" ng-click="$ctrl.onStartMatching()">Start Matching</button>
   <div class="col-xs-12 well" ng-show="$ctrl.userDetails.type === 2">
     <span ng-show="$ctrl.matches.length < 1">
       Click start matching to look for candidates
