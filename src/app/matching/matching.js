@@ -102,6 +102,7 @@ export const matching = {
 
     vm.openConnection = () => {
       vm.ws = new WebSocket('ws://45.77.181.210:8079');
+      // vm.ws = new WebSocket('ws://localhost:8079');
     };
 
     vm.onStartMatching = () => {

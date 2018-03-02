@@ -103,9 +103,9 @@
                     {{ job.description | limitTo:400 }}{{ job.description.length > 400 ? '...' : '' }}
                 </span>
             </span>
-            <span class="col-xs-12 col-md-2">
+            <!-- <span class="col-xs-12 col-md-2">
                 <button class="btn btn-danger" ng-click="$ctrl.deleteJob(job.id)">Delete Job</button>
-            </span>
+            </span> -->
         </li>
 
         <li class="list-group-item" ng-show="!$ctrl.userDetails.requirements">
