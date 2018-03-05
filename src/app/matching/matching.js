@@ -37,9 +37,6 @@ export const matching = {
         vm.openConnection();
         vm.ws.onopen = () => {
           $log.log('Connected to websockets', vm.userDetails);
-          if (vm.userDetails.type === 1) {
-            vm.ws.send(angular.toJson(vm.userDetails));
-          }
         };
         vm.ws.onmessage = msg => {
           const convertedMessageData = angular.fromJson(msg.data);
@@ -83,14 +80,23 @@ export const matching = {
           }
 
           if (convertedMessageData.message === 'additionalMatchesBusiness') {
+            let matched = false;
             const applicant = {
               userInfo: convertedMessageData.user
             };
-            const jobMatch = convertedMessageData.jobMatch;
-            vm.matches.push({
-              applicant,
-              jobMatch
+            vm.matches.some(currentMatch => {
+              if (currentMatch.applicant.userInfo.user_id === applicant.userInfo.user_id) {
+                matched = true;
+              }
+              return matched;
             });
+            if (!matched) {
+              const jobMatch = convertedMessageData.jobMatch;
+              vm.matches.push({
+                applicant,
+                jobMatch
+              });
+            }
             $log.log('new match', vm.matches);
             $scope.$digest();
           }
@@ -101,8 +107,8 @@ export const matching = {
     };
 
     vm.openConnection = () => {
-      vm.ws = new WebSocket('ws://45.77.181.210:8079');
-      // vm.ws = new WebSocket('ws://localhost:8079');
+      // vm.ws = new WebSocket('ws://45.77.181.210:8079');
+      vm.ws = new WebSocket('ws://localhost:8079');
     };
 
     vm.onStartMatching = () => {
@@ -111,16 +117,14 @@ export const matching = {
         vm.ws.send(angular.toJson(vm.userDetails));
         return;
       }
-      vm.availableMatches = vm.matches;
-      $log.log('current matches => ', vm.matches);
-      if (vm.availableMatches.length > 0) {
+      if (vm.userDetails.type === 1) {
+        vm.ws.send(angular.toJson(vm.userDetails));
+        vm.availableMatches = vm.matches;
+        $log.log('current matches => ', vm.matches);
         $timeout(() => {
           vm.loadMatch();
         }, 2000);
-      } else {
-        $timeout(() => {
-          vm.noMatches();
-        }, 5000);
+        return;
       }
     };
 
@@ -149,7 +153,7 @@ export const matching = {
       vm.matchModalInstance.result.then(obj => {
         const id = obj.id;
         const msg = obj.msg;
-        $log.log('going to', msg, id);
+        $log.log('going to', obj, msg, id);
         if (msg === 'next') {
           vm.loadingMatches = true;
           $timeout(() => {

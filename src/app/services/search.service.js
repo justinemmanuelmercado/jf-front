@@ -1,6 +1,6 @@
 export const SearchService = ($http, $log) => {
-  // const apiUrl = 'http://localhost:8000';
-  const apiUrl = 'http://api.mantunkapanintunan.com';
+  const apiUrl = 'http://localhost:8000';
+  // const apiUrl = 'http://api.mantunkapanintunan.com';
   return {
     getJobs: () => {
       return $http.get(`${apiUrl}/api/jobs`).then(data => {
@@ -22,9 +22,9 @@ export const SearchService = ($http, $log) => {
                 score++;
               }
             });
-            return score > 1;
+            return score > 0;
           });
-          if (score > 1) {
+          if (score > 0) {
             toReturn.push(job);
           }
         });

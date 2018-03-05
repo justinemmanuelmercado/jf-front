@@ -17,7 +17,7 @@
           <h4>Work Experience:</h4>
           <p>
             <span ng-repeat="experience in applicant.applicant.userInfo.requirements">
-              {{ experience.years_exp > 0 ? experience.years_exp + "years " : "Less than 1 year" }} experience in {{ experience.skill }}
+              {{ experience.years_exp > 0 ? experience.years_exp + " years " : "Less than 1 year" }} experience in {{ experience.skill }}
             </span>
           </p>
           Fits in the following jobs
@@ -61,7 +61,7 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-warning" type="button" ng-click="$ctrl.ok($ctrl.match.job.business_id, 'business')">View Business</button>
-      <button class="btn btn-warning" type="button" ng-click="$ctrl.ok('next')">Next Match</button>
+      <button class="btn btn-warning" type="button" ng-click="$ctrl.ok(null, 'next')">Next Match</button>
       <button class="btn btn-warning" type="button" ng-click="$ctrl.ok($ctrl.match.job.id, 'job')">View Job</button>
     </div>
   </script>
