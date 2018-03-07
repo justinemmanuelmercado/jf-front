@@ -38,6 +38,20 @@ export const user = {
       const ageDate = new Date(ageDifMs); // miliseconds from epoch
       return Math.abs(ageDate.getUTCFullYear() - 1970);
     };
+
+    vm.returnEducationAttained = education => {
+      if (education === 1) {
+        return 'Elementary or lower';
+      }
+
+      if (education === 2) {
+        return 'High School';
+      }
+
+      if (education === 3) {
+        return 'College level';
+      }
+    };
   }
 };
 

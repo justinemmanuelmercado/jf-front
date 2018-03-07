@@ -10,8 +10,18 @@
             Age
         </label>
         <p>{{ $ctrl.calculateAge($ctrl.userDetails.data.date_of_birth) }}</p>
-        <p>Highest Educational Attainment: (To-do [bachelor,master,phd,elem,hs], [course name] )</p>
-        <p>Employment history: todo optional</p>
+        <label for="">Email</label>
+        <p>{{ $ctrl.userDetails.data.email }}</p>
+        <label>Contact Number</label>
+        <p>{{ $ctrl.userDetails.data.number }}</p>
+        <label>Education</label>
+        <p>{{ $ctrl.userDetails.data.education }}</p>
+        <label for="">
+                Highest Education Attained
+        </label>
+        <p>{{ 
+            $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) 
+        }}</p>
         <h4>Skills and Experience</h4>
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">

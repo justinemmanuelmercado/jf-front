@@ -127,7 +127,11 @@ export const update = {
         id: vm.userDetails.id,
         firstName: vm.userDetails.data.first_name,
         lastName: vm.userDetails.data.last_name,
-        dateOfBirth: vm.userDetails.data.date_of_birth
+        dateOfBirth: vm.userDetails.data.date_of_birth,
+        number: vm.userDetails.data.number,
+        educationAttained: vm.userDetails.data.education_attained,
+        education: vm.userDetails.data.education,
+        email: vm.userDetails.data.email
       }).then(data => {
         $log.log(data);
       });

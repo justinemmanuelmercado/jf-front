@@ -9,11 +9,31 @@
             <label>Last Name</label>
             <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.last_name" />
         </p>
-        <p>Date Of Birth: </p>
+        <label>Date Of Birth: </label>
         <pre>Selected date is: <em>{{ $ctrl.userDetails.data.date_of_birth | date: 'yyyy-MM-dd' }}</em></pre>
         <div>
             <div uib-datepicker ng-model="$ctrl.userDetails.data.date_of_birth" class="well well-sm" datepicker-options="options"></div>
         </div>
+        <p class="form-group">
+            <label>Contact Number</label>
+            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.number" />
+        </p>
+        <p class="form-group">
+            <label>Highest Level of Education Attained</label>
+            <select class="form-control" ng-model="$ctrl.userDetails.data.education_attained">
+                <option ng-value="1">Elementary or lower</option>
+                <option ng-value="2">High School</option>
+                <option ng-value="3">College level</option>
+            </select>
+        </p>
+        <p class="form-group">
+            <label>Education</label>
+            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.education" />
+        </p>
+        <p class="form-group">
+            <label>Email Address (this is different from what you use to log in)</label>
+            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.email" />
+        </p>
         <button ng-click="$ctrl.saveProfile()" class="btn btn-default">Save Profile</button>
         <h4>Skills and Experience</h4>
         <div class="well">

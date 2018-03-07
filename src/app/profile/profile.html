@@ -4,6 +4,12 @@
         <h4>General Information</h4>
         <p>Name: {{ $ctrl.userDetails.data.first_name }} {{ $ctrl.userDetails.data.last_name }}</p>
         <p>Age: {{ $ctrl.calculateAge($ctrl.userDetails.data.date_of_birth) }}</p>
+        <p>Email: {{ $ctrl.userDetails.data.email }}</p>
+        <p>Contact Number: {{ $ctrl.userDetails.data.number }}</p>
+        <p>Education: {{ $ctrl.userDetails.data.education }}</p>
+        <p>Highest Education Attained: {{ 
+            $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) 
+        }}</p>
         <h4>Skills and Experience</h4>
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
@@ -11,7 +17,6 @@
                     {{ skill.skill }}
                 </span>
                 <span class="col-xs-5 col-xs-offset-3 text-right">
-
                     {{ skill.years_exp > 0 ? skill.years_exp + ' year/s of experience' : 'Less than 1 year experience' }}
                 </span>
             </li>
