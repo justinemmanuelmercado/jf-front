@@ -6,6 +6,8 @@ export const registration = {
     vm.applicantPassword = '';
     vm.businessEmail = '';
     vm.businessPassowrd = '';
+    vm.applicantValid = true;
+    vm.businessValid = true;
 
     vm.$onInit = () => {
       AccountService.getUsers().then(data => {
@@ -14,6 +16,24 @@ export const registration = {
     };
 
     vm.registerUser = (email, password, type) => {
+      if (!email || !password) {
+        if (type === 1) {
+          vm.applicantValid = false;
+          return;
+        }
+        if (type === 2) {
+          vm.businessValid = false;
+          return;
+        }
+      } else {
+        if (type === 1) {
+          vm.applicantValid = true;
+        }
+        if (type === 2) {
+          vm.businessValid = true;
+        }
+      }
+
       const data = {
         email,
         password,
@@ -53,3 +73,4 @@ const privateServices = {
     });
   }
 };
+

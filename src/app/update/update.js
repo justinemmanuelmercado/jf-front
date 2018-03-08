@@ -10,6 +10,7 @@ export const update = {
     vm.skillsAvailable = [];
     vm.skillSelect = {};
     vm.newJob = {};
+    vm.applicantFieldsValid = true;
     /*eslint-disable */
     vm.addressPickerOptions = {
       distanceWidget: true,
@@ -44,10 +45,13 @@ export const update = {
         };
 
         /*eslint-disable */
-        $scope.map = { center: { 
-          latitude: vm.userDetails.data.latitude,
-          longitude:  vm.userDetails.data.longitude 
-        }, zoom: 15 };
+        $scope.map = {
+          center: {
+            latitude: vm.userDetails.data.latitude,
+            longitude: vm.userDetails.data.longitude
+          },
+          zoom: 15
+        };
         $scope.searchbox = {
           template: 'searchbox.tpl.html',
           events: {
@@ -80,10 +84,14 @@ export const update = {
           }
         };
         $scope.marker = {
-          id: 0, coords: {
-            latitude: vm.userDetails.data.latitude, longitude: vm.userDetails.data.longitude
+          id: 0,
+          coords: {
+            latitude: vm.userDetails.data.latitude,
+            longitude: vm.userDetails.data.longitude
           },
-          options: { draggable: true },
+          options: {
+            draggable: true
+          },
           events: {
             dragend: (marker, eventName, args) => {
               $scope.marker.options = {
@@ -123,6 +131,24 @@ export const update = {
     };
 
     vm.saveProfile = () => {
+      if (!vm.userDetails.data.first_name ||
+        !vm.userDetails.data.last_name ||
+        !vm.userDetails.data.date_of_birth ||
+        !vm.userDetails.data.number ||
+        !vm.userDetails.data.education ||
+        !vm.userDetails.data.education_attained ||
+        !vm.userDetails.data.email
+      ) {
+        vm.applicantFieldsValid = false;
+      } else {
+        vm.applicantFieldsValid = true;
+      }
+
+      $log.log('applicant is', vm.userDetails.data.last_name.length);
+
+      if (!vm.applicantFieldsValid) {
+        return;
+      }
       AccountService.updateApplicant({
         id: vm.userDetails.id,
         firstName: vm.userDetails.data.first_name,
@@ -188,3 +214,4 @@ export const update = {
 };
 
 update.$inject = ['account.service', '$log', '$cookies', '$state', '$scope', 'uiGmapGoogleMapApi'];
+
