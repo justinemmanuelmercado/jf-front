@@ -11,6 +11,7 @@ export const update = {
     vm.skillSelect = {};
     vm.newJob = {};
     vm.applicantFieldsValid = true;
+    vm.additionalSkill = '';
     /*eslint-disable */
     vm.addressPickerOptions = {
       distanceWidget: true,
@@ -39,6 +40,9 @@ export const update = {
       vm.authToken = $cookies.get('token');
       AccountService.getData(vm.authToken).then(data => {
         vm.userDetails = data.data;
+        /*eslint-disable */
+        vm.userDetails.data.extra_skills = vm.convertToObject(vm.userDetails.data.extra_skills);
+        /*eslint-enable */
         vm.newJob = {
           businessId: vm.userDetails.id,
           requirements: []
@@ -157,7 +161,8 @@ export const update = {
         number: vm.userDetails.data.number,
         educationAttained: vm.userDetails.data.education_attained,
         education: vm.userDetails.data.education,
-        email: vm.userDetails.data.email
+        email: vm.userDetails.data.email,
+        extraSkills: angular.toJson(vm.userDetails.data.extra_skills)
       }).then(data => {
         $log.log(data);
       });
@@ -209,6 +214,31 @@ export const update = {
       }).then(data => {
         $log.log('update business return', data);
       });
+    };
+
+    vm.addExtraSkill = () => {
+      if (!vm.userDetails.data.extra_skills) {
+        /*eslint-disable */
+        vm.userDetails.data.extra_skills = [];
+        /*eslint-enable */
+      }
+
+      vm.userDetails.data.extra_skills.push(vm.additionalSkill);
+      vm.additionalSkill = '';
+
+      $log.log(vm.userDetails.data.extra_skills);
+    };
+
+    vm.removeSkill = ind => {
+      vm.userDetails.data.extra_skills.splice(ind, 1);
+    };
+
+    vm.convertToObject = str => {
+      if (angular.isString(str)) {
+        return angular.fromJson(str);
+      }
+
+      return str;
     };
   }
 };

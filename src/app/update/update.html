@@ -1,193 +1,220 @@
 <div class="col-xs-12 well">
-    <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 1">
-        <h4>General Information</h4>
-        <p class="form-group">
-            <label>First Name*</label>
-            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.first_name" />
-        </p>
-        <p class="form-group">
-            <label>Last Name*</label>
-            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.last_name" />
-        </p>
-        <label>Date Of Birth* </label>
-        <pre>Selected date is: <em>{{ $ctrl.userDetails.data.date_of_birth | date: 'yyyy-MM-dd' }}</em></pre>
-        <div>
-            <div uib-datepicker ng-model="$ctrl.userDetails.data.date_of_birth" class="well well-sm" datepicker-options="options"></div>
-        </div>
-        <p class="form-group">
-            <label>Contact Number*</label>
-            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.number" />
-        </p>
-        <p class="form-group">
-            <label>Highest Level of Education Attained*</label>
-            <select class="form-control" ng-model="$ctrl.userDetails.data.education_attained">
-                <option ng-value="1">Elementary or lower</option>
-                <option ng-value="2">High School</option>
-                <option ng-value="3">College level</option>
-            </select>
-        </p>
-        <p class="form-group">
-            <label>Education*</label>
-            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.education" />
-        </p>
-        <p class="form-group">
-            <label>Email Address (this is different from what you use to log in)*</label>
-            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.email" />
-        </p>
-        <p class="text-danger" ng-hide="$ctrl.applicantFieldsValid">Please fill in all required fields</p>
-        <button ng-click="$ctrl.saveProfile()" class="btn btn-default">Save Profile</button>
-        <h4>Skills and Experience</h4>
-        <div class="well">
-            <div class="col-xs-12">
-                <ul class="list-group">
-                    <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
-                        <span class="col-md-4 col-xs-12">
-                            {{ skill.skill }}
-                        </span>
-                        <span class="col-md-4 col-md-offset-3 col-xs-12">
-                            {{ skill.years_exp > 0 ? skill.years_exp + ' year/s of experience' : 'Less than 1 year experience' }}
-                        </span>
-                        <div class="col-xs-12 col-md-1">
-                            <button class="btn btn-danger" ng-click="$ctrl.deleteSkillApplicant(skill.id)">
-                                X
-                            </button>
-                        </div>
-                    </li>
-                    <li class="list-group-item" ng-hide="$ctrl.userDetails.requirements.length > 0">
-                        No skills added yet
-                    </li>
-                </ul>
+  <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 1">
+    <h4>General Information</h4>
+    <p class="form-group">
+      <label>First Name*</label>
+      <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.first_name" />
+    </p>
+    <p class="form-group">
+      <label>Last Name*</label>
+      <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.last_name" />
+    </p>
+    <label>Date Of Birth* </label>
+    <pre>Selected date is: <em>{{ $ctrl.userDetails.data.date_of_birth | date: 'yyyy-MM-dd' }}</em></pre>
+    <div>
+      <div uib-datepicker ng-model="$ctrl.userDetails.data.date_of_birth" class="well well-sm" datepicker-options="options"></div>
+    </div>
+    <p class="form-group">
+      <label>Contact Number*</label>
+      <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.number" />
+    </p>
+    <p class="form-group">
+      <label>Highest Level of Education Attained*</label>
+      <select class="form-control" ng-model="$ctrl.userDetails.data.education_attained">
+        <option ng-value="1">Elementary or lower</option>
+        <option ng-value="2">High School</option>
+        <option ng-value="3">College level</option>
+      </select>
+    </p>
+    <p class="form-group">
+      <label>Education*</label>
+      <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.education" />
+    </p>
+    <p class="form-group">
+      <label>Email Address (this is different from what you use to log in)*</label>
+      <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.email" />
+    </p>
+    <div class="well col-md-12" style="margin-top: 20px;">
+      <label>Additional Skills</label>
+      <ul class="list-group">
+        <li class="list-group-item col-md-12" ng-repeat="skill in $ctrl.userDetails.data.extra_skills track by $index">
+          <div class="col-md-10">
+            {{ skill }}
+          </div>
+          <div class="col-md-2">
+              <span class="btn btn-danger" ng-click=$ctrl.removeSkill($index)>
+                  X
+              </span>
+          </div>
+        </li>
+        <li class="list-group-item" ng-hide="$ctrl.userDetails.data.extra_skills.length > 0">
+          No additional skills added
+        </li>
+      </ul>
+      <label>
+        Add Skill
+      </label>
+      <p>To save your additional skills, click the "Save Profile" button</p>
+      <div class="col-md-12">
+        <input type="text" class="form-control" ng-model="$ctrl.additionalSkill" />
+        <button ng-disabled="!$ctrl.additionalSkill" ng-click="$ctrl.addExtraSkill()" class="btn btn-default">Add Skill</button>
+      </div>
+    </div>
+    <p class="text-danger" ng-hide="$ctrl.applicantFieldsValid">Please fill in all required fields</p>
+    <button ng-click="$ctrl.saveProfile()" class="btn btn-default">Save Profile</button>
+    <h4>Skills and Experience</h4>
+    <div class="well">
+      <div class="col-xs-12">
+        <ul class="list-group">
+          <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
+            <span class="col-md-4 col-xs-12">
+              {{ skill.skill }}
+            </span>
+            <span class="col-md-4 col-md-offset-3 col-xs-12">
+              {{ skill.years_exp > 0 ? skill.years_exp + ' year/s of experience' : 'Less than 1 year experience' }}
+            </span>
+            <div class="col-xs-12 col-md-1">
+              <button class="btn btn-danger" ng-click="$ctrl.deleteSkillApplicant(skill.id)">
+                X
+              </button>
+            </div>
+          </li>
+          <li class="list-group-item" ng-hide="$ctrl.userDetails.requirements.length > 0">
+            No skills added yet
+          </li>
+        </ul>
 
+      </div>
+      <div class="col-xs-12" style="margin-top: 20px;">
+        <div class="col-sm-9 col-xs-12">
+          <p class="form-group">
+            <label>Skill Name</label>
+            <div>
+              <select class="form-control" ng-model="$ctrl.skillSelect.skill" ng-options="skill.requirement as skill.requirement for skill in $ctrl.skillsAvailable">
+                <option value="">Select Type</option>
+              </select>
             </div>
-            <div class="col-xs-12" style="margin-top: 20px;">
-                <div class="col-sm-9 col-xs-12">
-                    <p class="form-group">
-                        <label>Skill Name</label>
-                        <div>
-                            <select class="form-control" ng-model="$ctrl.skillSelect.skill" ng-options="skill.requirement as skill.requirement for skill in $ctrl.skillsAvailable">
-                                <option value="">Select Type</option>
-                            </select>
-                        </div>
-                    </p>
-                </div>
-                <div class="col-sm-3 col-xs-12">
-                    <p class="form-group">
-                        <label>Years Exp</label>
-                        <div>
-                            <input type="number" class="form-control" ng-model="$ctrl.skillSelect.years_exp">
-                        </div>
-                    </p>
-                </div>
+          </p>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <p class="form-group">
+            <label>Years Exp</label>
+            <div>
+              <input type="number" class="form-control" ng-model="$ctrl.skillSelect.years_exp">
             </div>
-            <button class="btn btn-default" ng-click="$ctrl.addRequirement()">Add Skill</button>
+          </p>
         </div>
+      </div>
+      <button class="btn btn-default" ng-click="$ctrl.addRequirement()">Add Skill</button>
     </div>
-    <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 2">
-        <div class="btn-lg"></div>
-        <h4>General Information</h4>
-        <div class="form-group">
-            <label>Business Name</label>
-            <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.business_name" />
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" ng-model="$ctrl.userDetails.data.description"></textarea>
-        </div>
-        <div>
-            <label>
-                Map Location
-            </label>
-            <p>
-                Current Map Location: {{ marker.coords.latitude }}, {{ marker.coords.longitude }}
-            </p>
-            <ui-gmap-google-map ng-if="$ctrl.userDetails.type === 2" center="map.center" zoom="map.zoom" draggable="true" options="options">
-                <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-                <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
-            </ui-gmap-google-map>
-        </div>
-        <button class="btn btn-default" ng-click="$ctrl.updateBusinessDetails()">Update Profile</button>
+  </div>
+  <div class="col-xs-12" ng-if="$ctrl.userDetails.type === 2">
+    <div class="btn-lg"></div>
+    <h4>General Information</h4>
+    <div class="form-group">
+      <label>Business Name</label>
+      <input type="text" class="form-control" ng-model="$ctrl.userDetails.data.business_name" />
     </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea class="form-control" ng-model="$ctrl.userDetails.data.description"></textarea>
+    </div>
+    <div>
+      <label>
+        Map Location
+      </label>
+      <p>
+        Current Map Location: {{ marker.coords.latitude }}, {{ marker.coords.longitude }}
+      </p>
+      <ui-gmap-google-map ng-if="$ctrl.userDetails.type === 2" center="map.center" zoom="map.zoom" draggable="true" options="options">
+        <ui-gmap-search-box template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+        <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
+      </ui-gmap-google-map>
+    </div>
+    <button class="btn btn-default" ng-click="$ctrl.updateBusinessDetails()">Update Profile</button>
+  </div>
 </div>
 <div class="col-xs-12 well" ng-if="$ctrl.userDetails.type === 2">
-    <h4>Job Postings</h4>
-    <ul class="list-group">
-        <li class="list-group-item" ng-hide="$ctrl.userDetails.requirements.length > 0">
-            No jobs posted.
-        </li>
-        <li class="list-group-item col-xs-12" ng-repeat="job in $ctrl.userDetails.requirements">
-            <span class="col-xs-12 col-md-10">
+  <h4>Job Postings</h4>
+  <ul class="list-group">
+    <li class="list-group-item" ng-hide="$ctrl.userDetails.requirements.length > 0">
+      No jobs posted.
+    </li>
+    <li class="list-group-item col-xs-12" ng-repeat="job in $ctrl.userDetails.requirements">
+      <span class="col-xs-12 col-md-10">
 
-                <h4 class="col-xs-12">
-                    {{ job.job_title }}
-                </h4>
-                <span class="col-xs-12">
-                    {{ job.description | limitTo:400 }}{{ job.description.length > 400 ? '...' : '' }}
-                </span>
-            </span>
-            <!-- <span class="col-xs-12 col-md-2">
+        <h4 class="col-xs-12">
+          {{ job.job_title }}
+        </h4>
+        <span class="col-xs-12">
+          {{ job.description | limitTo:400 }}{{ job.description.length > 400 ? '...' : '' }}
+        </span>
+      </span>
+      <!-- <span class="col-xs-12 col-md-2">
                 <button class="btn btn-danger" ng-click="$ctrl.deleteJob(job.id)">Delete Job</button>
             </span> -->
-        </li>
+    </li>
 
-        <li class="list-group-item" ng-show="!$ctrl.userDetails.requirements">
-            No skills listed yet. Update your profile to add skills
-        </li>
-    </ul>
-    <div class="well" style="margin-top: 20px;">
-        <h4>New Job</h4>
-        <div class="form-group">
-            <label>Job Title</label>
-            <input type="text" class="form-control" ng-model="$ctrl.newJob.jobTitle" />
-        </div>
-        <div class="form-group">
-            <label>Job Description</label>
-            <textarea class="form-control" ng-model="$ctrl.newJob.description"></textarea>
-        </div>
-        <label>Skills Required</label>
-        <ul class="list-group">
-            <li class="list-group-item" ng-hide="$ctrl.newJob.requirements.length > 0">
-                No required skills yet
-            </li>
-            <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.newJob.requirements">
-                <span class="col-xs-4">
-                    {{ skill.skill }}
-                </span>
-                <span class="col-xs-4 col-xs-offset-3">
-                    {{ skill.years_exp > 0 ? skill.years_exp + ' year/s of experience' : 'Less than 1 year experience' }}
-                </span>
-                <div class="col-xs-1">
-                    <button class="btn btn-danger" ng-click="$ctrl.deleteJobSkill($index)">
-                        X
-                    </button>
-                </div>
-            </li>
-            <li class="list-group-item col-xs-12">
-                <div>
-                    <div class="col-sm-9 col-xs-12">
-                        <p class="form-group">
-                            <label>Skill Name</label>
-                            <div>
-                                <input type="text" class="form-control" ng-model="$ctrl.newSkill.skill" />
-                            </div>
-                        </p>
-                    </div>
-                    <div class="col-sm-3 col-xs-12">
-                        <p class="form-group">
-                            <label>Years Exp</label>
-                            <div>
-                                <input type="number" class="form-control" ng-model="$ctrl.newSkill.years_exp">
-                            </div>
-                        </p>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <button class="btn btn-default" ng-click="$ctrl.addSkillToJob($ctrl.newSkill)">Add Skill to required skill</button>
-        <button class="btn btn-default" ng-click="$ctrl.saveJob()">Add Jobs</button>
+    <li class="list-group-item" ng-show="!$ctrl.userDetails.requirements">
+      No skills listed yet. Update your profile to add skills
+    </li>
+  </ul>
+  <div class="well" style="margin-top: 20px;">
+    <h4>New Job</h4>
+    <div class="form-group">
+      <label>Job Title</label>
+      <input type="text" class="form-control" ng-model="$ctrl.newJob.jobTitle" />
     </div>
+    <div class="form-group">
+      <label>Job Description</label>
+      <textarea class="form-control" ng-model="$ctrl.newJob.description"></textarea>
+    </div>
+    <label>Skills Required</label>
+    <ul class="list-group">
+      <li class="list-group-item" ng-hide="$ctrl.newJob.requirements.length > 0">
+        No required skills yet
+      </li>
+      <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.newJob.requirements">
+        <span class="col-xs-4">
+          {{ skill.skill }}
+        </span>
+        <span class="col-xs-4 col-xs-offset-3">
+          {{ skill.years_exp > 0 ? skill.years_exp + ' year/s of experience' : 'Less than 1 year experience' }}
+        </span>
+        <div class="col-xs-1">
+          <button class="btn btn-danger" ng-click="$ctrl.deleteJobSkill($index)">
+            X
+          </button>
+        </div>
+      </li>
+      <li class="list-group-item col-xs-12">
+        <div>
+          <div class="col-sm-9 col-xs-12">
+            <p class="form-group">
+              <label>Skill Name</label>
+              <div>
+                <input type="text" class="form-control" ng-model="$ctrl.newSkill.skill" />
+              </div>
+            </p>
+          </div>
+          <div class="col-sm-3 col-xs-12">
+            <p class="form-group">
+              <label>Years Exp</label>
+              <div>
+                <input type="number" class="form-control" ng-model="$ctrl.newSkill.years_exp">
+              </div>
+            </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <button class="btn btn-default" ng-click="$ctrl.addSkillToJob($ctrl.newSkill)">Add Skill to required skill</button>
+    <button class="btn btn-default" ng-click="$ctrl.saveJob()">Add Jobs</button>
+  </div>
 </div>
 
 
 <script id="searchbox.tpl.html" type="text/ng-template">
-    <input type="text" placeholder="Search">
+  <input type="text" placeholder="Search">
 </script>
+

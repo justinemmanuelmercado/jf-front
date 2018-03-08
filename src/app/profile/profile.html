@@ -7,9 +7,19 @@
         <p>Email: {{ $ctrl.userDetails.data.email }}</p>
         <p>Contact Number: {{ $ctrl.userDetails.data.number }}</p>
         <p>Education: {{ $ctrl.userDetails.data.education }}</p>
-        <p>Highest Education Attained: {{ 
-            $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) 
-        }}</p>
+        <p>Highest Education Attained: {{ $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) }}
+        </p>
+        <div class="col-md-12">
+            <label>Additional Skills</label>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="skill in $ctrl.userDetails.data.extra_skills track by $index">
+                    {{ skill }}
+                </li>
+                <li class="list-group-item" ng-show="$ctrl.userDetails.data.extra_skills.length === 0 || !$ctrl.userDetails.data.extra_skills">
+                    No Additional Skills Listed
+                </li>
+            </ul>
+        </div>
         <h4>Skills and Experience</h4>
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
@@ -37,7 +47,7 @@
                 Map Location
             </label>
             <p>
-            {{ marker.coords.latitude }}, {{ marker.coords.longitude }}
+                {{ marker.coords.latitude }}, {{ marker.coords.longitude }}
             </p>
             <ui-gmap-google-map ng-if="$ctrl.userDetails.type === 2" center="map.center" zoom="map.zoom" draggable="true" options="options">
                 <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id"></ui-gmap-marker>
@@ -52,7 +62,17 @@
                 <span class="col-xs-12">
                     {{ job.description | limitTo:100 }}{{ job.description.length > 50 ? '...' : '' }}
                 </span>
-                <!-- <button class="btn btn-danger">Delete Job</button> -->
+                <div class="col-xs-12">
+                    <label>Requirements</label>
+
+                    <p ng-repeat="experience in job.jobRequirements">
+                        <span>
+                            {{ experience.years_exp > 0 ? experience.years_exp + " years " : "Less than 1 year" }} experience in {{ experience.requirement
+                            }}
+                        </span>
+                    </p>
+                </div>
+                <button class="btn btn-warn" ui-sref="job({jobId: job.id})">View Job</button>
             </li>
 
             <li class="list-group-item" ng-show="!$ctrl.userDetails.requirements">

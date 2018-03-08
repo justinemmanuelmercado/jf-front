@@ -17,11 +17,21 @@
         <label>Education</label>
         <p>{{ $ctrl.userDetails.data.education }}</p>
         <label for="">
-                Highest Education Attained
+            Highest Education Attained
         </label>
-        <p>{{ 
-            $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) 
-        }}</p>
+        <p>{{ $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) }}
+        </p>
+        <div class="col-md-12">
+            <label>Additional Skills</label>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="skill in $ctrl.userDetails.data.extra_skills track by $index">
+                    {{ skill }}
+                </li>
+                <li class="list-group-item" ng-show="$ctrl.userDetails.data.extra_skills.length === 0  || !$ctrl.userDetails.data.extra_skills">
+                    No Additional Skills Listed
+                </li>
+            </ul>
+        </div>
         <h4>Skills and Experience</h4>
         <ul class="list-group">
             <li class="list-group-item col-xs-12" ng-repeat="skill in $ctrl.userDetails.requirements">
@@ -68,15 +78,21 @@
                 <h4 class="col-xs-12">
                     {{ job.job_title }}
                 </h4>
-                <p class="col-xs-12">
-                    {{ job.address }}
-                </p>
-                <p class="col-xs-12">
-                    ADD FIELD OF STUDY/JOB FIELD
-                </p>
+
                 <span class="col-xs-12">
-                    {{ job.description | limitTo:100 }}{{ job.description.length > 50 ? '...' : '' }}
+                    {{ job.description | limitTo:400 }}{{ job.description.length > 50 ? '...' : '' }}
                 </span>
+                <div class="col-xs-12">
+                    <label>Requirements</label>
+
+                    <p ng-repeat="experience in job.jobRequirements">
+                        <span>
+                            {{ experience.years_exp > 0 ? experience.years_exp + " years " : "Less than 1 year" }} experience in {{ experience.requirement
+                            }}
+                        </span>
+                    </p>
+                </div>
+
                 <button class="btn btn-warn" ui-sref="job({jobId: job.id})">View Job</button>
             </li>
 

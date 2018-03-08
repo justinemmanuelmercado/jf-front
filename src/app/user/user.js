@@ -10,6 +10,9 @@ export const user = {
       vm.userId = $stateParams.userId;
       AccountService.getUserData(vm.userId).then(data => {
         vm.userDetails = data.data;
+        /*eslint-disable */
+        vm.userDetails.data.extra_skills = vm.convertToObject(vm.userDetails.data.extra_skills);
+        /*eslint-enable */
         $scope.map = {
           center: {
             latitude: vm.userDetails.data.latitude,
@@ -51,6 +54,14 @@ export const user = {
       if (education === 3) {
         return 'College level';
       }
+    };
+
+    vm.convertToObject = str => {
+      if (angular.isString(str)) {
+        return angular.fromJson(str);
+      }
+
+      return str;
     };
   }
 };
