@@ -24,7 +24,7 @@ export const SearchService = ($http, $log) => {
             });
             return score > 0;
           });
-          if (score > 0) {
+          if (score >= job.jobRequirements.length) {
             toReturn.push(job);
           }
         });
