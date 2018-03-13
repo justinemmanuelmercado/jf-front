@@ -5,7 +5,7 @@ export const registration = {
     vm.applicantEmail = '';
     vm.applicantPassword = '';
     vm.businessEmail = '';
-    vm.businessPassowrd = '';
+    vm.businessPassword = '';
     vm.applicantValid = true;
     vm.businessValid = true;
 
@@ -15,8 +15,8 @@ export const registration = {
       });
     };
 
-    vm.registerUser = (email, password, type) => {
-      if (!email || !password) {
+    vm.registerUser = (email, password, type, notRobot) => {
+      if (!email || !password || !notRobot) {
         if (type === 1) {
           vm.applicantValid = false;
           return;
@@ -47,6 +47,15 @@ export const registration = {
       });
 
       vm.isLoggedIn = false;
+    };
+
+    vm.passwordComplex = password => {
+      if (!password) {
+        return false;
+      }
+      const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+      return password.match(regex);
     };
   }
 };
