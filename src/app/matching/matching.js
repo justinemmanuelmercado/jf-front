@@ -135,6 +135,7 @@ export const matching = {
       }
       const randIndex = Math.floor(Math.random() * vm.availableMatches.length);
       const randMatch = vm.availableMatches[randIndex];
+      $log.log('vm.availablematches', vm.availableMatches[0]);
       vm.loadingMatches = false;
       vm.availableMatches.splice(randIndex, 1);
 
