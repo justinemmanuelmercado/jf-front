@@ -26,13 +26,8 @@
           <p class="text-danger" ng-hide="$ctrl.applicantValid">
             Please fill in all fields
           </p>
-          <div class="form-group">
-            <p>
-              <input type="checkbox" ng-model="robotApplicant"> I accept the terms and conditions
-            </p>
-          </div>
           <button type="button" class="btn btn-default" ng-click="$ctrl.registerUser($ctrl.applicantEmail, $ctrl.applicantPassword, 1, $ctrl.applicantValid)"
-            ng-disabled="$ctrl.matchApplicantPassword !== $ctrl.applicantPassword || !$ctrl.matchApplicantPassword || (!$ctrl.passwordComplex($ctrl.applicantPassword) && $ctrl.applicantPassword.length !== 0) || !robotApplicant">Create Account</button>
+            ng-disabled="$ctrl.matchApplicantPassword !== $ctrl.applicantPassword || !$ctrl.matchApplicantPassword || (!$ctrl.passwordComplex($ctrl.applicantPassword) && $ctrl.applicantPassword.length !== 0)">Create Account</button>
         </form>
       </div>
 
@@ -60,15 +55,10 @@
             <input type="password" class="form-control" ng-model="$ctrl.matchBusinessPassword" placeholder="Confirm Password" required>
             <div class="text-danger" ng-show="$ctrl.matchBusinessPassword !== $ctrl.businessPassword && $ctrl.businessPassword.length > 0 && $ctrl.matchBusinessPassword.length > 0">Whoops, these don't match</div>
           </div>
-          <div class="form-group">
-            <p>
-              <input type="checkbox" ng-model="robotBusiness"> I accept the terms and conditions
-            </p>
-          </div>
           <p class="text-danger" ng-hide="$ctrl.businessValid">
             Please fill in all fields
           </p>
-          <button type="button" ng-disabled="$ctrl.matchBusinessPassword !== $ctrl.businessPassword || !$ctrl.matchBusinessPassword || (!$ctrl.passwordComplex($ctrl.businessPassword) && $ctrl.businessPassword.length !== 0) || !robotBusiness"
+          <button type="button" ng-disabled="$ctrl.matchBusinessPassword !== $ctrl.businessPassword || !$ctrl.matchBusinessPassword || (!$ctrl.passwordComplex($ctrl.businessPassword) && $ctrl.businessPassword.length !== 0)"
             class="btn btn-default" ng-click="$ctrl.registerUser($ctrl.businessEmail, $ctrl.businessPassword, 2, $ctrl.businessValid)">Create Account</button>
         </form>
       </div>
