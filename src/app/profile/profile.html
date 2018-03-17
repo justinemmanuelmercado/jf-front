@@ -4,7 +4,7 @@
         <h4>General Information</h4>
         <p>Name: {{ $ctrl.userDetails.data.first_name }} {{ $ctrl.userDetails.data.last_name }}</p>
         <p>Age: {{ $ctrl.calculateAge($ctrl.userDetails.data.date_of_birth) }}</p>
-        <p>Email: {{ $ctrl.userDetails.data.email }}</p>
+        <p>Address: {{ $ctrl.userDetails.data.email }}</p>
         <p>Contact Number: {{ $ctrl.userDetails.data.number }}</p>
         <p>Education: {{ $ctrl.userDetails.data.education }}</p>
         <p>Highest Education Attained: {{ $ctrl.returnEducationAttained($ctrl.userDetails.data.education_attained) }}
